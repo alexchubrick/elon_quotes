@@ -1,6 +1,6 @@
 import MyHero from "@/components/MyHero";
 import MyFooter from "@/components/MyFooter";
-import LikeButton from "@/components/LikeButton"; // Import the LikeButton component
+import LikeButton from "@/components/LikeButton";
 import { createClient } from '@/libs/supabase/server';
 
 export default async function Page() {
@@ -34,14 +34,6 @@ export default async function Page() {
                 <div className="flex flex-col justify-start items-center gap-0.5 h-min font-bold">
                   <LikeButton quoteId={quote.id} initialLikes={quote.likes} />
                 </div>
-              </div>
-              <div className="buttons text-right text-neutral-500 text-xs mb-3">
-                <a href="" className="hover:underline">
-                  <span className="mr-3">Comment</span>
-                </a>
-                <a href="" className="hover:underline">
-                  <span>Share</span>
-                </a>
               </div>
             </div>
           ))}

@@ -1,31 +1,23 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { useState } from "react";
 
 export default function LikeButton({ quoteId, initialLikes }) {
     const [likes, setLikes] = useState(initialLikes);
+    const [isLiked, setIsLiked] = useState(false);
 
     const handleLike = async () => {
-        // Optimistically update the UI
-        setLikes(likes + 1);
+        setIsLiked(true); // Change icon color when liked
+        setLikes(likes + 1); // Optimistically update the UI
 
-        try {
-            const res = await fetch('/api/like', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: quoteId }),
-            });
+        const res = await fetch('/api/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: quoteId }),
+        });
 
-            if (!res.ok) {
-                throw new Error('Failed to like the quote');
-            }
-        } catch (error) {
-            // Revert the optimistic update if there's an error
-            setLikes(likes - 1);
-            console.error(error);
-        }
     };
 
     return (
